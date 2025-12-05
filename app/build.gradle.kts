@@ -40,6 +40,7 @@ dependencies {
 
     implementation("androidx.core:core-splashscreen:1.0.0")
     implementation("androidx.compose.material:material-icons-extended:1.7.7")
+    implementation("androidx.datastore:datastore-preferences:1.2.0")
 
     implementation("com.android.volley:volley:1.2.1")
 
