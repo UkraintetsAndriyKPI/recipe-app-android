@@ -1,4 +1,4 @@
-package com.example.recipeandroidapp.common
+package com.example.recipeandroidapp.ui.common
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement

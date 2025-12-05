@@ -13,9 +13,9 @@ import androidx.compose.ui.tooling.preview.Preview
 import com.example.recipeandroidapp.Dimens.MediumPadding1
 import com.example.recipeandroidapp.Dimens.MediumPadding2
 import com.example.recipeandroidapp.Dimens.PageIndicatorWidth
-import com.example.recipeandroidapp.common.OnBoardingButton
-import com.example.recipeandroidapp.common.OnBoardingTextButton
-import com.example.recipeandroidapp.common.PageIndicator
+import com.example.recipeandroidapp.ui.common.OnBoardingButton
+import com.example.recipeandroidapp.ui.common.OnBoardingTextButton
+import com.example.recipeandroidapp.ui.common.PageIndicator
 import com.example.recipeandroidapp.presentation.onboarding.components.OnBoardingPage
 import kotlinx.coroutines.launch
 
