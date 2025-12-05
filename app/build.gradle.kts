@@ -10,7 +10,7 @@ android {
 
     defaultConfig {
         applicationId = "com.example.recipeandroidapp"
-        minSdk = 21
+        minSdk = 23
         targetSdk = 36
         versionCode = 1
         versionName = "1.0"
@@ -37,6 +37,11 @@ android {
 }
 
 dependencies {
+
+    implementation("androidx.core:core-splashscreen:1.0.0")
+    implementation("androidx.compose.material:material-icons-extended:1.7.7")
+
+    implementation("com.android.volley:volley:1.2.1")
 
     implementation("androidx.core:core-ktx:1.17.0")
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.10.0")
