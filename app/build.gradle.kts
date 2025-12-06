@@ -2,6 +2,9 @@ plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
     id("org.jetbrains.kotlin.plugin.compose")
+
+    id("kotlin-kapt")
+    id("com.google.dagger.hilt.android")
 }
 
 android {
@@ -38,11 +41,29 @@ android {
 
 dependencies {
 
-    implementation("androidx.core:core-splashscreen:1.0.0")
-    implementation("androidx.compose.material:material-icons-extended:1.7.7")
+    // Splash Api
+    implementation("androidx.core:core-splashscreen:1.2.0")
+    // New Icons
+    implementation("androidx.compose.material:material-icons-extended:1.7.8")
+    // Datastore
     implementation("androidx.datastore:datastore-preferences:1.2.0")
 
-    implementation("com.android.volley:volley:1.2.1")
+    // Dagger Hilt
+    implementation("com.google.dagger:hilt-android:2.57.2")
+    kapt("com.google.dagger:hilt-compiler:2.57.2")
+
+    // Retrofit
+    implementation("com.squareup.retrofit2:retrofit:3.0.0")
+
+    // Kotlinx Serialization
+    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.9.0")
+    implementation("com.jakewharton.retrofit:retrofit2-kotlinx-serialization-converter:1.0.0")
+
+    // Coil
+    implementation("io.coil-kt:coil-compose:3.3.0")
+
+    // Compose Foundation
+    implementation("androidx.compose.foundation:foundation:1.10.0")
 
     implementation("androidx.core:core-ktx:1.17.0")
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.10.0")
