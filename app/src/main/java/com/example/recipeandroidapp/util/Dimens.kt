@@ -1,4 +1,4 @@
-package com.example.recipeandroidapp
+package com.example.recipeandroidapp.util
 
 import androidx.compose.ui.unit.dp
 

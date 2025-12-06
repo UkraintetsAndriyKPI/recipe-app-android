@@ -10,9 +10,9 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import com.example.recipeandroidapp.Dimens.MediumPadding1
-import com.example.recipeandroidapp.Dimens.MediumPadding2
-import com.example.recipeandroidapp.Dimens.PageIndicatorWidth
+import com.example.recipeandroidapp.util.Dimens.MediumPadding1
+import com.example.recipeandroidapp.util.Dimens.MediumPadding2
+import com.example.recipeandroidapp.util.Dimens.PageIndicatorWidth
 import com.example.recipeandroidapp.ui.common.OnBoardingButton
 import com.example.recipeandroidapp.ui.common.OnBoardingTextButton
 import com.example.recipeandroidapp.ui.common.PageIndicator
