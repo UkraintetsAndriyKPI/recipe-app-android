@@ -35,7 +35,7 @@ fun OnBoardingScreen() {
             }
         }
 
-        HorizontalPager(state = pagerState) { index ->
+        HorizontalPager(state = pagerState, userScrollEnabled = false) { index ->
             OnBoardingPage(page = pages[index])
         }
         Spacer(modifier = Modifier.weight(1f))

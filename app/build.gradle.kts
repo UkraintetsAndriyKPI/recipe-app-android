@@ -60,7 +60,7 @@ dependencies {
     implementation("com.jakewharton.retrofit:retrofit2-kotlinx-serialization-converter:1.0.0")
 
     // Coil
-    implementation("io.coil-kt:coil-compose:3.3.0")
+    implementation("io.coil-kt:coil-compose:2.4.0")
 
     // Compose Foundation
     implementation("androidx.compose.foundation:foundation:1.10.0")
