@@ -51,6 +51,7 @@ dependencies {
     // Dagger Hilt
     implementation("com.google.dagger:hilt-android:2.57.2")
     kapt("com.google.dagger:hilt-compiler:2.57.2")
+    implementation("androidx.hilt:hilt-navigation-compose:1.3.0")
 
     // Retrofit
     implementation("com.squareup.retrofit2:retrofit:3.0.0")
@@ -64,6 +65,9 @@ dependencies {
 
     // Compose Foundation
     implementation("androidx.compose.foundation:foundation:1.10.0")
+
+    //Accompanist
+    implementation("com.google.accompanist:accompanist-systemuicontroller:0.36.0")
 
     implementation("androidx.core:core-ktx:1.17.0")
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.10.0")

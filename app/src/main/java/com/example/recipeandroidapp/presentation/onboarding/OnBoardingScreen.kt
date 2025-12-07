@@ -10,6 +10,7 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import com.example.recipeandroidapp.util.Dimens.MediumPadding1
 import com.example.recipeandroidapp.util.Dimens.MediumPadding2
 import com.example.recipeandroidapp.util.Dimens.PageIndicatorWidth
@@ -20,7 +21,9 @@ import com.example.recipeandroidapp.presentation.onboarding.components.OnBoardin
 import kotlinx.coroutines.launch
 
 @Composable
-fun OnBoardingScreen() {
+fun OnBoardingScreen(
+    event: (OnBoardingEvent) -> Unit
+) {
     Column(modifier = Modifier.fillMaxSize()) {
         val pagerState = rememberPagerState(initialPage = 0) {
             pages.size
@@ -67,8 +70,8 @@ fun OnBoardingScreen() {
 
                 OnBoardingButton(text = buttonState.value[1], onClick = {
                     scope.launch {
-                        if (pagerState.currentPage == 3) {
-                            // TODO: Nav to main screen
+                        if (pagerState.currentPage == 1) {
+                            event(OnBoardingEvent.SaveAppEntry)
                         } else {
                             pagerState.animateScrollToPage(page = pagerState.currentPage + 1)
                         }
@@ -83,5 +86,5 @@ fun OnBoardingScreen() {
 @Preview(showBackground = true, showSystemUi = true)
 @Composable
 fun OnBoardingScreenPreview() {
-    OnBoardingScreen()
+    OnBoardingScreen(event = {})
 }
