@@ -9,11 +9,11 @@ interface RecipeApi {
     @GET("recipeList")
     suspend fun getRecipes(
         @Query("page") page: Int,
-        @Query("tag") tagIds: List<Int>? = null,
-        @Query("category") categoryIds: List<Int>? = null,
+        @Query("tag") tagIds: String? = null,
+        @Query("category") categoryIds: String? = null,
         @Query("min_time") minTime: Int? = null,
         @Query("max_time") maxTime: Int? = null,
-        @Query("search") search: String? = null,
+        @Query("search") search: String? = null
     ): RecipeResponse
 
 }
