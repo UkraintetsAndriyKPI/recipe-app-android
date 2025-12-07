@@ -66,8 +66,12 @@ dependencies {
     // Compose Foundation
     implementation("androidx.compose.foundation:foundation:1.10.0")
 
-    //Accompanist
+    // Accompanist
     implementation("com.google.accompanist:accompanist-systemuicontroller:0.36.0")
+
+    // Paging 3
+    implementation("androidx.paging:paging-runtime:3.3.6")
+    implementation("androidx.paging:paging-compose:3.3.6")
 
     implementation("androidx.core:core-ktx:1.17.0")
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.10.0")
