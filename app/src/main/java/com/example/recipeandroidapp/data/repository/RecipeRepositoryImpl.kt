@@ -14,14 +14,14 @@ class RecipeRepositoryImpl(
 ): RecipeRepository {
 
     override fun getRecipes(
-        tagIds: List<Int>?,
-        categoryIds: List<Int>?,
+        tagIds: Set<Int>,
+        categoryIds: Set<Int>,
         minTime: Int?,
         maxTime: Int?,
         search: String?
     ): Flow<PagingData<Recipe>> {
         return Pager(
-            PagingConfig(pageSize = 10),
+            PagingConfig(pageSize = 5),
             pagingSourceFactory = {
                 RecipePagingSource(
                     recipeApi = recipeApi,
@@ -34,4 +34,6 @@ class RecipeRepositoryImpl(
             }
         ).flow
     }
+
+
 }

@@ -6,8 +6,8 @@ import kotlinx.coroutines.flow.Flow
 
 interface RecipeRepository {
     fun getRecipes(
-        tagIds: List<Int>? = null,
-        categoryIds: List<Int>? = null,
+        tagIds: Set<Int> = emptySet(),
+        categoryIds: Set<Int> = emptySet(),
         minTime: Int? = null,
         maxTime: Int? = null,
         search: String? = null

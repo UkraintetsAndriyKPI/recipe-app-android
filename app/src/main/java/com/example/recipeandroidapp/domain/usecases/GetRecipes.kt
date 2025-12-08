@@ -9,8 +9,8 @@ class GetRecipes(
     private val recipeRepository: RecipeRepository
 ) {
     operator fun invoke(
-        tagIds: List<Int>? = null,
-        categoryIds: List<Int>? = null,
+        tagIds: Set<Int> = emptySet(),
+        categoryIds: Set<Int> = emptySet(),
         minTime: Int? = null,
         maxTime: Int? = null,
         search: String? = null

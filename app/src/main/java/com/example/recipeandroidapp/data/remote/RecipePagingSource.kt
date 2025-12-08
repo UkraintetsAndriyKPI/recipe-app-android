@@ -4,6 +4,7 @@ import android.net.Uri
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.example.recipeandroidapp.domain.model.Recipe
+import androidx.core.net.toUri
 
 class RecipePagingSource(
     private val recipeApi: RecipeApi,
@@ -45,7 +46,7 @@ class RecipePagingSource(
     private fun getPageNumberFromUrl(url: String?): Int? {
         if (url == null) return null
         return try {
-            val uri = Uri.parse(url)
+            val uri = url.toUri()
             uri.getQueryParameter("page")?.toInt()
         } catch (e: Exception) {
             null
