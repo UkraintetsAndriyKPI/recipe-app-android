@@ -5,6 +5,7 @@ plugins {
 
     id("kotlin-kapt")
     id("com.google.dagger.hilt.android")
+    id("kotlin-parcelize")
 }
 
 android {
@@ -43,8 +44,13 @@ dependencies {
 
     // Splash Api
     implementation("androidx.core:core-splashscreen:1.2.0")
+
+    // Compose Navigation
+    implementation("androidx.navigation:navigation-compose:2.9.6")
+
     // New Icons
     implementation("androidx.compose.material:material-icons-extended:1.7.8")
+
     // Datastore
     implementation("androidx.datastore:datastore-preferences:1.2.0")
 
@@ -55,6 +61,7 @@ dependencies {
 
     // Retrofit
     implementation("com.squareup.retrofit2:retrofit:3.0.0")
+    implementation("com.squareup.retrofit2:converter-gson:2.9.0")
 
     // Kotlinx Serialization
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.9.0")
@@ -72,6 +79,11 @@ dependencies {
     // Paging 3
     implementation("androidx.paging:paging-runtime:3.3.6")
     implementation("androidx.paging:paging-compose:3.3.6")
+
+    // Room
+    implementation("androidx.room:room-runtime:2.8.4")
+    kapt("androidx.room:room-compiler:2.8.4")
+    implementation("androidx.room:room-ktx:2.8.4")
 
     implementation("androidx.core:core-ktx:1.17.0")
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.10.0")
