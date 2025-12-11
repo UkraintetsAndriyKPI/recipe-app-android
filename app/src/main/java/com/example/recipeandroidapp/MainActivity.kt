@@ -8,16 +8,19 @@ import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.runtime.Composable
 import androidx.compose.runtime.SideEffect
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
+import androidx.lifecycle.lifecycleScope
+import com.example.recipeandroidapp.data.local.RecipeDao
+import com.example.recipeandroidapp.domain.model.Category
+import com.example.recipeandroidapp.domain.model.Recipe
+import com.example.recipeandroidapp.domain.model.Tag
 import com.example.recipeandroidapp.presentation.navgraph.NavGraph
-import com.example.recipeandroidapp.presentation.navgraph.Route
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import dagger.hilt.android.AndroidEntryPoint
-import kotlin.getValue
+import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
@@ -25,6 +28,7 @@ class MainActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         installSplashScreen().apply {
             setKeepOnScreenCondition {
                 viewModel.splashCondition
@@ -47,15 +51,4 @@ class MainActivity : ComponentActivity() {
         }
     }
 }
-
-@Preview(showBackground = true)
-@Composable
-fun NavGraphPreview() {
-    MaterialTheme {
-        NavGraph(
-            startDestination = Route.AppStartNavigation.route,
-        )
-    }
-}
-
 
