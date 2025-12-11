@@ -90,20 +90,18 @@ object AppModule {
     ): RecipeUseCases {
         return RecipeUseCases(
             getRecipes = GetRecipes(recipeRepository),
-            getDailyRecipesRecipes = GetDailyRecipes(recipeRepository),
+            getDailyRecipes = GetDailyRecipes(recipeRepository),
             searchRecipes = SearchRecipes(recipeRepository),
             getAllCategories = GetAllCategories(recipeRepository),
             getAllTags = GetAllTags(recipeRepository),
             getIngredients = GetIngredients(recipeRepository),
             getSteps = GetSteps(recipeRepository),
 
-
             upsertRecipe = UpsertRecipe(recipeDao),
             deleteRecipe = DeleteRecipe(recipeDao),
             selectRecipes = SelectRecipes(recipeDao),
             getRecipeById = GetRecipeById(recipeDao),
-
-        )
+            )
     }
 
     @Provides
