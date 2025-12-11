@@ -1,6 +1,6 @@
-package com.example.recipeandroidapp.domain.usecases;
+package com.example.recipeandroidapp.domain.usecases
 
-import com.example.recipeandroidapp.domain.manager.LocalUserManager;
+import com.example.recipeandroidapp.domain.manager.LocalUserManager
 
 class SaveAppEntry(
     private val localUserInterface: LocalUserManager
