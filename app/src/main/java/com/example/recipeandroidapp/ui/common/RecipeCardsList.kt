@@ -37,7 +37,7 @@ fun handleListResult(
     recipes: List<Recipe>
 ): Boolean {
     if (recipes.isEmpty()) {
-        EmptyScreen()
+        EmptyScreen(error = null as String?)
         return false
     }
     return true
@@ -85,7 +85,7 @@ fun handlePagingResult(
             false
         }
         error != null ->{
-            EmptyScreen()
+            EmptyScreen(error = error)
             false
         }
         else -> true
@@ -96,7 +96,7 @@ fun handlePagingResult(
 @Composable
 private fun ShimmerEffect(){
     Column(verticalArrangement = Arrangement.spacedBy(SmallPadding1)) {
-        repeat(10){
+        repeat(5){
             RecipeCardShimmerEffect()
         }
     }

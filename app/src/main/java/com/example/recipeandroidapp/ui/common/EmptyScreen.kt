@@ -14,6 +14,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
@@ -41,7 +42,41 @@ fun EmptyScreen(error: LoadState.Error? = null) {
     }
 
     var icon by remember {
-        mutableStateOf(R.drawable.ic_network_error)
+        mutableIntStateOf(R.drawable.ic_network_error)
+    }
+
+    if (error == null){
+        message = "Recipe list empty!"
+        icon = R.drawable.ic_network_error
+    }
+
+    var startAnimation by remember {
+        mutableStateOf(false)
+    }
+
+    val alphaAnimation by animateFloatAsState(
+        targetValue = if (startAnimation) 0.3f else 0f,
+        animationSpec = tween(durationMillis = 1000)
+    )
+
+    LaunchedEffect(key1 = true) {
+        startAnimation = true
+    }
+
+    EmptyContent(alphaAnim = alphaAnimation, message = message, iconId = icon)
+
+}
+
+
+@Composable
+fun EmptyScreen(error: String? = null) {
+
+    var message by remember {
+        mutableStateOf(parseErrorMessage(error = error))
+    }
+
+    var icon by remember {
+        mutableIntStateOf(R.drawable.ic_network_error)
     }
 
     if (error == null){
@@ -106,6 +141,10 @@ fun parseErrorMessage(error: LoadState.Error?): String {
             "Unknown Error."
         }
     }
+}
+
+fun parseErrorMessage(error: String?): String {
+    return error ?: "Unknown Error."
 }
 
 @Preview(showBackground = true)
