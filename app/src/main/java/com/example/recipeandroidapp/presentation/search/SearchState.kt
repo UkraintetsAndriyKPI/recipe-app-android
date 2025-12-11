@@ -1,14 +1,17 @@
 package com.example.recipeandroidapp.presentation.search
 
-import androidx.paging.PagingData
-import com.example.recipeandroidapp.domain.model.Recipe
-import kotlinx.coroutines.flow.Flow
+import com.example.recipeandroidapp.domain.model.Category
+import com.example.recipeandroidapp.domain.model.Tag
 
 
 data class SearchState(
     val searchQuery: String = "",
     val selectedTags: Set<Int> = emptySet(),
     val selectedCategories: Set<Int> = emptySet(),
-    val recipes: Flow<PagingData<Recipe>>? = null
-) {
-}
+
+    val allTags: Set<Tag> = emptySet(),
+    val allCategories: Set<Category> = emptySet(),
+
+    val isLoading: Boolean = false,
+    val error: String? = null
+)

@@ -1,15 +1,11 @@
 package com.example.recipeandroidapp.presentation.search
 
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.statusBarsPadding
+import androidx.compose.foundation.layout.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.paging.compose.LazyPagingItems
 import androidx.paging.compose.collectAsLazyPagingItems
-import com.example.recipeandroidapp.presentation.navgraph.Route
+import com.example.recipeandroidapp.domain.model.Recipe
 import com.example.recipeandroidapp.ui.common.RecipeCardsList
 import com.example.recipeandroidapp.ui.common.SearchBar
 import com.example.recipeandroidapp.util.Dimens.MediumPadding1
@@ -19,7 +15,8 @@ fun SearchScreen(
     modifier: Modifier = Modifier,
     state: SearchState,
     event: (SearchEvent) -> Unit,
-    navigate: (String) -> Unit
+    navigateToDetails: (Recipe) -> Unit,
+    recipes: LazyPagingItems<Recipe>
 ) {
     Column(
         modifier = Modifier
@@ -41,10 +38,11 @@ fun SearchScreen(
             modifier = Modifier.height(MediumPadding1)
         )
 
-        state.recipes?.let {
-            val recipes = it.collectAsLazyPagingItems()
-            RecipeCardsList(recipes = recipes, onClick = {navigate(Route.DetailsScreen.route)})
-        }
+
+        RecipeCardsList(
+            recipes = recipes,
+            onClick = { recipe -> navigateToDetails(recipe) },
+        )
 
     }
 
