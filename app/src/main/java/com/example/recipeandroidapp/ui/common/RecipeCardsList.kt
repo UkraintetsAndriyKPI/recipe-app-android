@@ -18,12 +18,41 @@ import com.example.recipeandroidapp.util.Dimens.SmallPadding1
 @Composable
 fun RecipeCardsList(
     modifier: Modifier = Modifier,
+    recipes: List<Recipe>,
+    onClick: (Recipe) -> Unit
+) {
+    LazyColumn(
+        modifier = modifier.fillMaxSize(),
+        verticalArrangement = Arrangement.spacedBy(8.dp),
+        contentPadding = PaddingValues(8.dp)
+    ) {
+        items(count = recipes.size) { index ->
+            RecipeCard(recipe = recipes[index], onClick = { onClick(recipes[index]) })
+        }
+    }
+}
+
+@Composable
+fun handleListResult(
+    recipes: List<Recipe>
+): Boolean {
+    if (recipes.isEmpty()) {
+        EmptyScreen()
+        return false
+    }
+    return true
+}
+
+
+@Composable
+fun RecipeCardsList(
+    modifier: Modifier = Modifier,
     recipes: LazyPagingItems<Recipe>,
     onClick: (Recipe) -> Unit
 ) {
     val handlePagingResult = handlePagingResult(recipes = recipes)
     if (handlePagingResult){
-        LazyColumn(modifier = Modifier.fillMaxSize(),
+        LazyColumn(modifier = modifier.fillMaxSize(),
             verticalArrangement = Arrangement.spacedBy(8.dp),
             contentPadding = PaddingValues(8.dp)
         ) {

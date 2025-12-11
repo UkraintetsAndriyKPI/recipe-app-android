@@ -5,7 +5,6 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.interaction.collectIsPressedAsState
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
@@ -30,7 +29,6 @@ import com.example.recipeandroidapp.domain.model.Category
 import com.example.recipeandroidapp.domain.model.Recipe
 import com.example.recipeandroidapp.domain.model.Tag
 import com.example.recipeandroidapp.ui.theme.RecipeAndroidAppTheme
-import com.example.recipeandroidapp.util.Dimens.SmallPadding1
 
 @Composable
 fun FilterButton(onClick: () -> Unit) {
@@ -214,6 +212,7 @@ fun RecipeCardPreview() {
     )
 
     val sampleRecipe = Recipe(
+        id = 1,
         title = "Pancakes",
         description = "Fluffy pancakes for breakfast, " +
                 "Lorem Ipsum is simply dummy text of " +
