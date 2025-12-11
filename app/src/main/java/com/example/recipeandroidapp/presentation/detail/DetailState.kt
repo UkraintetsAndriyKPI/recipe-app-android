@@ -8,5 +8,6 @@ data class RecipeDetailState(
     val isLoading: Boolean = false,
     val recipe: Recipe? = null,
     val steps: List<Step> = emptyList(),
-    val ingredients: List<Ingredient> = emptyList()
+    val ingredients: List<Ingredient> = emptyList(),
+    val error: String? = null
 )

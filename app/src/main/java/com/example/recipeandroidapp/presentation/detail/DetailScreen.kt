@@ -29,7 +29,8 @@ fun DetailScreen(
     ingredients: List<Ingredient> = emptyList(),
     steps: List<Step> = emptyList(),
     event: (DetailEvent) -> Unit,
-    navigateUp: () -> Unit
+    navigateUp: () -> Unit,
+    viewModel: DetailViewModel,
 ) {
     Column(
         modifier = modifier
@@ -37,7 +38,7 @@ fun DetailScreen(
             .statusBarsPadding()
     ) {
         DetailTopBar(
-            onBookmarkClick = { event(DetailEvent.BookmarkRecipe) },
+            onBookmarkClick = { event(DetailEvent.UpsertBookmarkRecipe(recipe = recipe)) },
             onBackClick = navigateUp
         )
 
@@ -202,13 +203,13 @@ fun DetailScreen(
             }
 
             // Ingredients
-            if (ingredients.isNotEmpty()) {
+            if (viewModel.state.ingredients.isNotEmpty()) {
                 item {
                     Text(
                         "Ingredients:",
                         style = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.SemiBold)
                     )
-                    ingredients.forEach { ing ->
+                    viewModel.state.ingredients.forEach { ing ->
                         Text(
                             "• ${ing.quantity ?: "-"} ${ing.unit} ${ing.ingredient_name}",
                             style = MaterialTheme.typography.bodyLarge
@@ -219,13 +220,13 @@ fun DetailScreen(
             }
 
             // Steps
-            if (steps.isNotEmpty()) {
+            if (viewModel.state.steps.isNotEmpty()) {
                 item {
                     Text(
                         "Steps:",
                         style = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.SemiBold)
                     )
-                    steps.forEach { step ->
+                    viewModel.state.steps.forEach { step ->
                         Text(
                             "${step.step_number}. ${step.instruction}",
                             style = MaterialTheme.typography.bodyLarge,
@@ -240,46 +241,47 @@ fun DetailScreen(
 }
 
 
-@Preview(showBackground = true)
-@Composable
-fun DetailScreenPreview() {
-    val sampleRecipe = Recipe(
-        title = "Spaghetti Carbonara",
-        description = "A classic Italian pasta dish with eggs, cheese, pancetta, and pepper.",
-        cooking_time_min = 25,
-        creation_date = "2025-12-08",
-        is_published = true,
-        image = null,
-        categories = listOf(
-            Category(id = 1, category_name = "Italian"),
-            Category(id = 2, category_name = "Pasta")
-        ),
-        tags = listOf(
-            Tag(id = 1, tag_name = "Quick"),
-            Tag(id = 2, tag_name = "Dinner")
-        )
-    )
-
-    val sampleIngredients = listOf(
-        Ingredient(ingredient_name = "Spaghetti", quantity = "200", unit = "g", position = 1),
-        Ingredient(ingredient_name = "Pancetta", quantity = "100", unit = "g", position = 2),
-        Ingredient(ingredient_name = "Parmesan", quantity = "50", unit = "g", position = 3),
-        Ingredient(ingredient_name = "Eggs", quantity = "2", unit = "pcs", position = 4)
-    )
-
-    val sampleSteps = listOf(
-        Step(step_number = 1, instruction = "Boil the spaghetti in salted water."),
-        Step(step_number = 2, instruction = "Fry the pancetta until crisp."),
-        Step(step_number = 3, instruction = "Mix eggs and parmesan in a bowl."),
-        Step(step_number = 4, instruction = "Combine spaghetti with pancetta and egg mixture off the heat."),
-        Step(step_number = 5, instruction = "Serve immediately with extra parmesan and pepper.")
-    )
-
-    DetailScreen(
-        recipe = sampleRecipe,
-        ingredients = sampleIngredients,
-        steps = sampleSteps,
-        event = {},
-        navigateUp = {}
-    )
-}
+//@Preview(showBackground = true)
+//@Composable
+//fun DetailScreenPreview() {
+//    val sampleRecipe = Recipe(
+//        id = 1,
+//        title = "Spaghetti Carbonara",
+//        description = "A classic Italian pasta dish with eggs, cheese, pancetta, and pepper.",
+//        cooking_time_min = 25,
+//        creation_date = "2025-12-08",
+//        is_published = true,
+//        image = null,
+//        categories = listOf(
+//            Category(id = 1, category_name = "Italian"),
+//            Category(id = 2, category_name = "Pasta")
+//        ),
+//        tags = listOf(
+//            Tag(id = 1, tag_name = "Quick"),
+//            Tag(id = 2, tag_name = "Dinner")
+//        ),
+//    )
+//
+//    val sampleIngredients = listOf(
+//        Ingredient(ingredient_name = "Spaghetti", quantity = "200", unit = "g", position = 1),
+//        Ingredient(ingredient_name = "Pancetta", quantity = "100", unit = "g", position = 2),
+//        Ingredient(ingredient_name = "Parmesan", quantity = "50", unit = "g", position = 3),
+//        Ingredient(ingredient_name = "Eggs", quantity = "2", unit = "pcs", position = 4)
+//    )
+//
+//    val sampleSteps = listOf(
+//        Step(step_number = 1, instruction = "Boil the spaghetti in salted water."),
+//        Step(step_number = 2, instruction = "Fry the pancetta until crisp."),
+//        Step(step_number = 3, instruction = "Mix eggs and parmesan in a bowl."),
+//        Step(step_number = 4, instruction = "Combine spaghetti with pancetta and egg mixture off the heat."),
+//        Step(step_number = 5, instruction = "Serve immediately with extra parmesan and pepper.")
+//    )
+//
+//    DetailScreen(
+//        recipe = sampleRecipe,
+//        ingredients = sampleIngredients,
+//        steps = sampleSteps,
+//        event = {},
+//        navigateUp = {}
+//    )
+//}
