@@ -1,8 +1,11 @@
 package com.example.recipeandroidapp.presentation.home
 
 import androidx.compose.foundation.layout.*
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.sp
 import com.example.recipeandroidapp.domain.model.Recipe
 import com.example.recipeandroidapp.ui.common.EmptyScreen
 import com.example.recipeandroidapp.ui.common.RecipeCardShimmerEffect
@@ -33,13 +36,20 @@ fun HomeScreen(
         SearchBar(
             searchText = "Tap to search",
             readOnly = true,
-            onTextChange = { },
+            onValueChange = { },
             onFilterClick = navigateToFilter,
             onSearchClick = navigateToSearch,
             onSearch = {}
         )
 
         Spacer(modifier = Modifier.height(MediumPadding1))
+
+        Text(
+            text = "Daily Recipes",
+            fontSize = 20.sp,
+            fontWeight = FontWeight.Bold,
+            modifier = Modifier.padding(bottom = SmallPadding1)
+        )
 
         when {
             state.isLoading -> {
