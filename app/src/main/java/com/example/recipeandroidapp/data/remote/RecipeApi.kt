@@ -3,6 +3,7 @@ package com.example.recipeandroidapp.data.remote
 import com.example.recipeandroidapp.data.remote.dto.RecipeResponse
 import com.example.recipeandroidapp.domain.model.Category
 import com.example.recipeandroidapp.domain.model.Ingredient
+import com.example.recipeandroidapp.domain.model.Recipe
 import com.example.recipeandroidapp.domain.model.Step
 import com.example.recipeandroidapp.domain.model.Tag
 import retrofit2.http.GET
@@ -32,8 +33,11 @@ interface RecipeApi {
     ): List<Step>
 
     @GET("categories/")
-    suspend fun getCategories(): List<Category>
+    suspend fun getCategories(): Set<Category>
 
     @GET("tags/")
-    suspend fun getTags(): List<Tag>
+    suspend fun getTags(): Set<Tag>
+
+    @GET("recipe/daily-recipes/")
+    suspend fun getDailyRecipes(): List<Recipe>
 }

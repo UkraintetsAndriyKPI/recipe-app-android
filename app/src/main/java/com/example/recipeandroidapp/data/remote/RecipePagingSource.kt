@@ -1,10 +1,9 @@
 package com.example.recipeandroidapp.data.remote
 
-import android.net.Uri
+import androidx.core.net.toUri
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.example.recipeandroidapp.domain.model.Recipe
-import androidx.core.net.toUri
 
 class RecipePagingSource(
     private val recipeApi: RecipeApi,
@@ -17,8 +16,8 @@ class RecipePagingSource(
     private var totalRecipeCount = 0
 
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, Recipe> {
+        val page = params.key ?: 1
         return try {
-            val page = params.key ?: 1
 
             val response = recipeApi.getRecipes(
                 page = page,
@@ -37,9 +36,30 @@ class RecipePagingSource(
                 nextKey = getPageNumberFromUrl(response.next)
             )
 
-        } catch (e: Exception) {
+        } catch (e: java.net.SocketTimeoutException) {
+            // Таймаут
             e.printStackTrace()
-            LoadResult.Error(e)
+            LoadResult.Error(Exception("Server timeout — please try again"))
+
+        } catch (e: java.net.UnknownHostException) {
+            // Немає інтернету
+            e.printStackTrace()
+            LoadResult.Error(Exception("No internet connection"))
+
+        } catch (e: retrofit2.HttpException) {
+            // HTTP помилки 4xx / 5xx
+            e.printStackTrace()
+            LoadResult.Error(Exception("Server error: ${e.code()}"))
+
+        } catch (e: java.io.IOException) {
+            // Інші проблеми з мережею
+            e.printStackTrace()
+            LoadResult.Error(Exception("Network error"))
+
+        } catch (e: Exception) {
+            // Невідомі помилки
+            e.printStackTrace()
+            LoadResult.Error(Exception("Unexpected error"))
         }
     }
 

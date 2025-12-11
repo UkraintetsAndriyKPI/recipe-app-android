@@ -4,6 +4,8 @@ import androidx.core.net.toUri
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.example.recipeandroidapp.domain.model.Recipe
+import retrofit2.HttpException
+import java.io.IOException
 
 class SearchRecipePagingSource(
     private val recipeApi: RecipeApi,
@@ -44,15 +46,24 @@ class SearchRecipePagingSource(
                 search = search
             )
 
-            val recipes = response.results
-
             LoadResult.Page(
-                data = recipes,
+                data = response.results,
                 prevKey = getPageNumberFromUrl(response.previous),
                 nextKey = getPageNumberFromUrl(response.next)
             )
 
+        } catch (e: IOException) {
+            // No internet, timeout
+            e.printStackTrace()
+            LoadResult.Error(e)
+
+        } catch (e: HttpException) {
+            // HTTP errors: 4xx, 5xx
+            e.printStackTrace()
+            LoadResult.Error(e)
+
         } catch (e: Exception) {
+            // Unknown errors
             e.printStackTrace()
             LoadResult.Error(e)
         }
