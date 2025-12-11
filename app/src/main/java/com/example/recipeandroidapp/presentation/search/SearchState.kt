@@ -5,7 +5,7 @@ import com.example.recipeandroidapp.domain.model.Tag
 
 
 data class SearchState(
-    val searchQuery: String = "",
+    val searchQuery: String? = "",
     val selectedTags: Set<Int> = emptySet(),
     val selectedCategories: Set<Int> = emptySet(),
 
