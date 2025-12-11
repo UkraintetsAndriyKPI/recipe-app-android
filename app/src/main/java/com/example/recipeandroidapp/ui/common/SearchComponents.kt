@@ -1,5 +1,6 @@
 package com.example.recipeandroidapp.ui.common
 
+import android.util.Log
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
@@ -58,18 +59,16 @@ fun SearchBarPreview() {
             modifier = Modifier.fillMaxWidth(),
             searchText = text,
             readOnly = false,
-            onTextChange = { text = it },
+            onValueChange = { text = it },
             onFilterClick = { },
-            onSearch = { }
-        )
+            onSearch = { })
     }
 }
 
 
 @Composable
 fun RecipeCard(
-    recipe: Recipe,
-    onClick: () -> Unit = {}
+    recipe: Recipe, onClick: () -> Unit = {}
 ) {
     Card(
         modifier = Modifier
@@ -113,19 +112,20 @@ fun RecipeCard(
             Column(
                 modifier = Modifier
                     .fillMaxHeight()
-                    .padding(16.dp),
-                verticalArrangement = Arrangement.SpaceBetween
+                    .padding(16.dp), verticalArrangement = Arrangement.SpaceBetween
             ) {
                 Column {
                     Text(
                         text = recipe.title,
-                        style = MaterialTheme.typography.titleMedium
+                        style = MaterialTheme.typography.titleMedium,
+                        maxLines = 1,
                     )
                     Spacer(modifier = Modifier.height(4.dp))
                     Text(
                         text = recipe.categories.joinToString(separator = ", ") { it.category_name },
                         style = MaterialTheme.typography.bodyMedium,
-                        color = MaterialTheme.colorScheme.primary
+                        color = MaterialTheme.colorScheme.primary,
+                        maxLines = 1,
                     )
                     Spacer(modifier = Modifier.height(4.dp))
                     Text(
@@ -170,8 +170,7 @@ fun RecipeCard(
                                         color = MaterialTheme.colorScheme.primary.copy(alpha = 0.1f),
                                         shape = RoundedCornerShape(4.dp)
                                     )
-                                    .padding(horizontal = 8.dp),
-                                contentAlignment = Alignment.Center
+                                    .padding(horizontal = 8.dp), contentAlignment = Alignment.Center
                             ) {
                                 Text(
                                     text = tag.tag_name,
@@ -198,8 +197,7 @@ fun RecipeCard(
 fun RecipeCardPreview() {
     // fake cats and recipe
     val sampleCategories = listOf(
-        Category(id = 1, category_name = "Quick"),
-        Category(id = 2, category_name = "Dessert")
+        Category(id = 1, category_name = "Quick"), Category(id = 2, category_name = "Dessert")
     )
 
     val sampleTags = listOf(
@@ -213,15 +211,8 @@ fun RecipeCardPreview() {
 
     val sampleRecipe = Recipe(
         id = 1,
-        title = "Pancakes",
-        description = "Fluffy pancakes for breakfast, " +
-                "Lorem Ipsum is simply dummy text of " +
-                "the printing and typesetting industry." +
-                " Lorem Ipsum has been the industry's " +
-                "standard dummy text ever since the 1500s, " +
-                "when an unknown printer took a galley of type " +
-                "and scrambled it to make a type specimen book. " +
-                "It has survived not only five centuries, ",
+        title = "PancakesPancakesPancakesPancakes",
+        description = "Fluffy pancakes for breakfast, " + "Lorem Ipsum is simply dummy text of " + "the printing and typesetting industry." + " Lorem Ipsum has been the industry's " + "standard dummy text ever since the 1500s, " + "when an unknown printer took a galley of type " + "and scrambled it to make a type specimen book. " + "It has survived not only five centuries, ",
         cooking_time_min = 20,
         creation_date = "2025-11-26T19:27:20.008993Z",
         is_published = true,
@@ -233,13 +224,9 @@ fun RecipeCardPreview() {
     MaterialTheme {
         Column(modifier = Modifier.padding(16.dp)) {
             RecipeCard(
-                recipe = sampleRecipe,
-                onClick = {}
-            )
+                recipe = sampleRecipe, onClick = {})
             RecipeCard(
-                recipe = sampleRecipe,
-                onClick = {}
-            )
+                recipe = sampleRecipe, onClick = {})
         }
     }
 }
@@ -250,7 +237,7 @@ fun SearchBar(
     modifier: Modifier = Modifier,
     searchText: String,
     readOnly: Boolean,
-    onTextChange: (String) -> Unit,
+    onValueChange: (String) -> Unit,
     onSearchClick: (() -> Unit)? = null,
     onFilterClick: () -> Unit,
     onSearch: () -> Unit,
@@ -266,7 +253,9 @@ fun SearchBar(
                 .weight(1f)
                 .height(56.dp),
             text = searchText,
-            onTextChange = onTextChange,
+            onValueChange = { value ->
+                Log.d("SearchBar", "Text changed: $value")
+                onValueChange(value) },
             readOnly = readOnly,
             onSearch = onSearch,
             onClick = onSearchClick
@@ -282,7 +271,7 @@ fun SearchTextField(
     text: String,
     readOnly: Boolean = false,
     onClick: (() -> Unit)? = null,
-    onTextChange: (String) -> Unit,
+    onValueChange: (String) -> Unit,
     onSearch: () -> Unit = {},
 ) {
     val interactionSource = remember {
@@ -291,7 +280,8 @@ fun SearchTextField(
     val isClicked = interactionSource.collectIsPressedAsState().value
 
     LaunchedEffect(key1 = isClicked) {
-        if (isClicked){
+        if (isClicked) {
+            Log.d("SearchTextField", "TextField clicked")
             onClick?.invoke()
         }
     }
@@ -300,7 +290,9 @@ fun SearchTextField(
         modifier = modifier.height(56.dp),
         value = text,
         readOnly = readOnly,
-        onValueChange = onTextChange,
+        onValueChange = { value ->
+            Log.d("SearchTextField", "Text changed: $value")
+            onValueChange(value) },
         placeholder = { Text("Search recipes …") },
         leadingIcon = { Icon(Icons.Default.Search, contentDescription = null) },
         shape = RoundedCornerShape(28.dp),
@@ -312,7 +304,10 @@ fun SearchTextField(
         ),
         singleLine = true,
         keyboardOptions = KeyboardOptions(imeAction = ImeAction.Search),
-        keyboardActions = KeyboardActions(onSearch = { onSearch() }),
+        keyboardActions = KeyboardActions(onSearch = {
+            Log.d("SearchTextField", "Keyboard search pressed with text: $text")
+            onSearch()
+        }),
         interactionSource = interactionSource
     )
 }
