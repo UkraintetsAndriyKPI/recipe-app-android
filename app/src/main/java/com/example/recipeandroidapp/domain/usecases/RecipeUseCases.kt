@@ -3,7 +3,7 @@ package com.example.recipeandroidapp.domain.usecases
 data class RecipeUseCases(
     // Recipe API
     val getRecipes: GetRecipes,
-    val getDailyRecipesRecipes: GetDailyRecipes,
+    val getDailyRecipes: GetDailyRecipes,
     val searchRecipes: SearchRecipes,
 
     // Room
