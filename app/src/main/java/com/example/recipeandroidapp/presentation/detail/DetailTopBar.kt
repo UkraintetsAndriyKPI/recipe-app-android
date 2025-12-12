@@ -3,7 +3,8 @@ package com.example.recipeandroidapp.presentation.detail
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
-import androidx.compose.material.icons.filled.BookmarkBorder
+import androidx.compose.material.icons.filled.Bookmark
+import androidx.compose.material.icons.outlined.BookmarkBorder
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -16,6 +17,7 @@ fun DetailTopBar(
     modifier: Modifier = Modifier,
     onBookmarkClick: () -> Unit,
     onBackClick: () -> Unit,
+    isBookmarked: Boolean
 ) {
     TopAppBar(
         title = {
@@ -39,8 +41,12 @@ fun DetailTopBar(
         actions = {
             IconButton(onClick = onBookmarkClick) {
                 Icon(
-                    imageVector = Icons.Default.BookmarkBorder,
-                    contentDescription = "Bookmark"
+                    imageVector = if (isBookmarked)
+                        Icons.Filled.Bookmark
+                    else
+                        Icons.Outlined.BookmarkBorder,
+                    contentDescription = "Bookmark",
+                    tint = MaterialTheme.colorScheme.onSurfaceVariant
                 )
             }
         }
@@ -55,7 +61,20 @@ fun DetailTopBarPreview() {
     MaterialTheme {
         DetailTopBar(
             onBackClick = {},
-            onBookmarkClick = {}
+            onBookmarkClick = {},
+            isBookmarked = false
+        )
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun DetailTopBarPreview2() {
+    MaterialTheme {
+        DetailTopBar(
+            onBackClick = {},
+            onBookmarkClick = {},
+            isBookmarked = true
         )
     }
 }

@@ -1,6 +1,7 @@
 package com.example.recipeandroidapp.presentation.home
 
 import androidx.compose.foundation.layout.*
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -46,8 +47,7 @@ fun HomeScreen(
 
         Text(
             text = "Daily Recipes",
-            fontSize = 20.sp,
-            fontWeight = FontWeight.Bold,
+            style = MaterialTheme.typography.titleLarge,
             modifier = Modifier.padding(bottom = SmallPadding1)
         )
 

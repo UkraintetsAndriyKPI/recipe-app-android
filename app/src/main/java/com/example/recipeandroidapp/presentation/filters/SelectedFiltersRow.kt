@@ -47,7 +47,7 @@ fun SelectedFiltersRow(
             ) {
                 Text(
                     text = category.category_name,
-                    style = MaterialTheme.typography.labelSmall,
+                    style = MaterialTheme.typography.labelLarge,
                     color = MaterialTheme.colorScheme.primary
                 )
             }
@@ -58,13 +58,14 @@ fun SelectedFiltersRow(
             Box(
                 modifier = Modifier
                     .background(
-                        MaterialTheme.colorScheme.secondary.copy(alpha = 0.25f), shape = RoundedCornerShape(14.dp)
+                        MaterialTheme.colorScheme.secondary.copy(alpha = 0.25f),
+                        shape = RoundedCornerShape(14.dp)
                     )
                     .padding(horizontal = 12.dp, vertical = 6.dp)
             ) {
                 Text(
                     text = tag.tag_name,
-                    style = MaterialTheme.typography.bodySmall,
+                    style = MaterialTheme.typography.labelLarge,
                     color = MaterialTheme.colorScheme.secondary
                 )
             }
