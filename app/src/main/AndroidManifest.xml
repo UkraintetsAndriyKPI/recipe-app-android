@@ -11,12 +11,12 @@
             android:label="@string/app_name"
             android:roundIcon="@mipmap/recipe_icon"
             android:supportsRtl="true"
-            android:theme="@style/Theme.RecipeAndroidApp">
+            android:theme="@style/Theme.RecipeSplashScreen">
         <activity
                 android:name=".MainActivity"
                 android:exported="true"
                 android:label="@string/app_name"
-                android:theme="@style/Theme.RecipeAndroidApp">
+                android:theme="@style/Theme.RecipeSplashScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
