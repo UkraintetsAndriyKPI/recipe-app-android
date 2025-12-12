@@ -10,12 +10,12 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class FilterViewModel @Inject constructor(
+open class FilterViewModel @Inject constructor(
     private val repository: RecipeRepository
 ) : ViewModel() {
 
     private val _state = MutableStateFlow(FilterState())
-    val state: StateFlow<FilterState> = _state
+    open val state: StateFlow<FilterState> = _state
 
     init {
         loadFilters()
@@ -35,6 +35,14 @@ class FilterViewModel @Inject constructor(
                     println("Error loading filters: ${e.message}")
                 }
         }
+    }
+
+    fun setSelectedTags(tags: Set<Int>) {
+        _state.value = _state.value.copy(selectedTags = tags)
+    }
+
+    fun setSelectedCategories(categories: Set<Int>) {
+        _state.value = _state.value.copy(selectedCategories = categories)
     }
 
     fun onEvent(event: FilterEvent) {
