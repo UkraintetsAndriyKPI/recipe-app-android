@@ -9,5 +9,6 @@ data class RecipeDetailState(
     val recipe: Recipe? = null,
     val steps: List<Step> = emptyList(),
     val ingredients: List<Ingredient> = emptyList(),
+    val isBookmarked: Boolean = false,
     val error: String? = null
 )

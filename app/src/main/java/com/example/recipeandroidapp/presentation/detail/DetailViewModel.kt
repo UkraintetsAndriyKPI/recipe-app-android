@@ -14,7 +14,7 @@ import javax.inject.Inject
 @HiltViewModel
 class DetailViewModel @Inject constructor(
     private val recipeUseCases: RecipeUseCases
-): ViewModel() {
+) : ViewModel() {
 
     var state by mutableStateOf(RecipeDetailState())
         private set
@@ -22,20 +22,22 @@ class DetailViewModel @Inject constructor(
         private set
 
 
-
     fun onEvent(event: DetailEvent) {
-        when(event){
+        when (event) {
             DetailEvent.BackClick -> {
                 /*TODO()*/
             }
+
             is DetailEvent.UpsertBookmarkRecipe -> {
                 viewModelScope.launch {
                     val recipe = recipeUseCases.getRecipeById(event.recipe)
-                    if (recipe == null){
+                    if (recipe == null) {
                         recipeUseCases.upsertRecipe(event.recipe)
+                        state = state.copy(isBookmarked = true)
                         sideEffect = "Recipe saved"
                     } else {
                         recipeUseCases.deleteRecipe(recipe)
+                        state = state.copy(isBookmarked = false)
                         sideEffect = "Recipe deleted"
                     }
                 }
@@ -54,12 +56,14 @@ class DetailViewModel @Inject constructor(
             try {
                 val ingredients = recipeUseCases.getIngredients(recipe.id)
                 val steps = recipeUseCases.getSteps(recipe.id)
+                val savedRecipe = recipeUseCases.getRecipeById(recipe)
 
                 state = state.copy(
                     isLoading = false,
                     recipe = recipe,
                     ingredients = ingredients,
-                    steps = steps
+                    steps = steps,
+                    isBookmarked = (savedRecipe != null)
                 )
             } catch (e: Exception) {
                 state = state.copy(
