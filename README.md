@@ -1,3 +1,7 @@
+![preview1](assets/images/preview1.webp)
+
+![preview2](assets/images/preview2.webp)
+
 ## Recipe App - Android
 Android application for browsing, searching, filtering, and bookmarking recipes using Jetpack Compose and Kotlin.
 
