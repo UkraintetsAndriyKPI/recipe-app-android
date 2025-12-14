@@ -60,6 +60,7 @@ fun Navigator(modifier: Modifier = Modifier) {
         else -> 0
     }
 
+
     Scaffold(
         modifier = Modifier.fillMaxSize(),
         bottomBar = {
@@ -74,7 +75,7 @@ fun Navigator(modifier: Modifier = Modifier) {
                     }
                 }
             )
-        }
+        },
     ) {
         val bottomPadding = it.calculateBottomPadding()
 
@@ -176,6 +177,35 @@ fun Navigator(modifier: Modifier = Modifier) {
 
             composable(route = Route.FilterScreen.route) {
                 val viewModel: FilterViewModel = hiltViewModel()
+
+                val selectedTags = navController.previousBackStackEntry
+                    ?.savedStateHandle
+                    ?.get<Set<Int>>("selectedTags")
+
+                val selectedCategories = navController.previousBackStackEntry
+                    ?.savedStateHandle
+                    ?.get<Set<Int>>("selectedCategories")
+
+                LaunchedEffect(selectedTags, selectedCategories) {
+                    if ((selectedTags != null) && (selectedCategories != null)) {
+
+                        Log.d("NAVIGATOR FilterScreen", "Applying filters -> tags: $selectedTags, categories: $selectedCategories")
+
+                        viewModel.setSelectedTags(selectedTags)
+                        viewModel.setSelectedCategories(selectedCategories)
+
+//                        navController.previousBackStackEntry
+//                            ?.savedStateHandle
+//                            ?.remove<Set<Int>>("selectedTags")
+//                        navController.previousBackStackEntry
+//                            ?.savedStateHandle
+//                            ?.remove<Set<Int>>("selectedCategories")
+
+                        Log.d("NAVIGATOR FilterScreen", "selectedTags and selectedCategories removed from SavedStateHandle")
+                    } else {
+                        Log.d("NAVIGATOR FilterScreen", "selectedTags and selectedCategories == null")
+                    }
+                }
 
                 FilterScreen(
                     viewModel = viewModel,

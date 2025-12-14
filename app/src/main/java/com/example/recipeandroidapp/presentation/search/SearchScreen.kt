@@ -10,7 +10,6 @@ import com.example.recipeandroidapp.presentation.filters.SelectedFiltersRow
 import com.example.recipeandroidapp.ui.common.RecipeCardsList
 import com.example.recipeandroidapp.ui.common.SearchBar
 import com.example.recipeandroidapp.util.Dimens.MediumPadding1
-import com.example.recipeandroidapp.util.Dimens.SmallPadding1
 
 @Composable
 fun SearchScreen(
